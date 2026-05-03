@@ -13,11 +13,9 @@ BIZ_NAME = os.environ.get("BIZ_NAME", "Our Shop")
 BIZ_PRODUCT = os.environ.get("BIZ_PRODUCT", "products")
 BIZ_EXTRA = os.environ.get("BIZ_EXTRA", "")
 
-
-@app.route("/", methods=["GET"])
+@app.route("/")
 def home():
-    return "OK - Bot is running!", 200
-
+    return "WORKING!", 200
 
 @app.route("/webhook", methods=["GET"])
 def verify():
@@ -27,7 +25,6 @@ def verify():
     if mode == "subscribe" and token == VERIFY_TOKEN:
         return challenge, 200
     return "Forbidden", 403
-
 
 @app.route("/webhook", methods=["POST"])
 def webhook():
@@ -59,7 +56,6 @@ def webhook():
                     except Exception as e:
                         print(f"Error: {e}")
     return "OK", 200
-
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
